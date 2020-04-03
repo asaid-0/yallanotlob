@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  root 'welcome#index'
+  
+  post 'groups_users' => 'groups_users#create'
+  delete 'groups_users/destroy/:id' => 'groups_users#destroy'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  
+  root 'welcome#index'
+  resources :groups
   get  'users/index',to:"users#index"
   
   devise_for :users, controllers: 

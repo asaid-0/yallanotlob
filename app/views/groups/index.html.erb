@@ -1,0 +1,39 @@
+<div class="container">
+    <h4>Add new group</h4>
+    <div class="form-group">
+        <%= form_tag(groups_path, method: "post") do %>
+        <%= text_field_tag(:name, nil, placeholder: "Group name...", class: "form-control") %>
+        <%= submit_tag "Create", class: "btn btn-outline-info " %>
+        <% end %>
+    </div>
+    <div class="row">
+        <div class="col-sm-6" style="background-color:yellow;">
+
+            <% @groups.each do |group| %>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title"><%= group.name %></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><%= group.updated_at %></h6>
+                    <a href=<%= edit_group_path(group) %> class="card-link">Add friends</a>
+                    <%= link_to 'Delete', group, method: :delete %>
+                    <br>
+                </div>
+            </div>
+
+            <% end %>
+        </div>
+        <div class="col-sm-6" style="background-color:pink;">
+            <% if defined? (@group) %>
+            <p><%= @group.name %> </p>
+            <div class="form-group">
+                <%= form_tag(groups_users_path(@group), method: "post") do %>
+                <%= text_field_tag(:name, nil, placeholder: "Friend name...", class: "form-control") %>
+                <%= submit_tag "Add", class: "btn btn-outline-info " %>
+                <% end %>
+                <% @group.users.each do |user| %>
+                <p class="card-text"><%= user.name %></p>
+                <% end %>
+            <% end %>
+            </div>
+        </div>
+    </div>
