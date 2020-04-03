@@ -1,6 +1,6 @@
 class CreateUsersGroupsJoinTable < ActiveRecord::Migration[6.0]
   def change
-    create_join_table :users, :groups do |t|
+    create_join_table :users, :groups, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
       t.index :user_id
       t.index :group_id
     end

@@ -1,6 +1,6 @@
 class CreateFriendships < ActiveRecord::Migration[6.0]
   def change
-    create_table :friendships do |t|
+    create_table :friendships, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
       t.bigint :friend_id
       t.index :friend_id
       t.timestamps null: false
