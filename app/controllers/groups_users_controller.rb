@@ -1,7 +1,8 @@
 class GroupsUsersController < ApplicationController
   def create
     @user = User.find_by(name: params[:name])
-    if (@user.present? && @user != current_user)
+    
+    if (@user.present? && @user != current_user && current_user.friends.exists?(@user.id))
       @selected_group = Group.find(params[:format])
       @selected_group.users << User.find_by(name: params[:name])
     end
