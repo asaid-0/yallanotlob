@@ -1,0 +1,48 @@
+<%content_for :title do%>
+Sign in
+<%end%>
+
+<div class="card bg-light">
+  <article class="card-body mx-auto" style="max-width: 400px;">
+    <h4 class="card-title mt-3 text-center">Sing In</h4>
+    <p>
+      <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-google"></i>   Login via google</a>
+      <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
+    </p>
+    <p class="divider-text">
+      <span class="bg-light">OR</span>
+    </p>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+        </div>
+        <%= f.email_field :email,class:"form-control", placeholder: "Email" ,autofocus: true, autocomplete: "email" %>
+      </div> <!-- form-group// -->
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+        </div>
+        <%= f.password_field :password, class:"form-control",placeholder: "Password" , autocomplete: "new-password" %>
+      </div> <!-- form-group// -->
+
+      <div class="form-group input-group">
+        <% if devise_mapping.rememberable? %>
+          <div class="field">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end %>
+      </div>  
+
+      <div class="form-group">
+          <%= f.submit "Log In" , class: "btn btn-primary btn-block"%>
+      </div> <!-- form-group// -->      
+      <p class="text-center">Have an account? <%= render "devise/shared/links" %> </p>                                                                 
+  <% end %>
+
+  </article>
+</div>
+
