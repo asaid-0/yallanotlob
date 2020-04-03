@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
-  post 'groups_users' => 'groups_users#create'
-  delete 'groups_users/destroy/:id' => 'groups_users#destroy'
+  post 'groups_users' , to: 'groups_users#create'
+  delete 'groups_users/destroy/:id' , to: 'groups_users#destroy', as: :remove_user
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
   root 'welcome#index'

@@ -13,7 +13,10 @@
  *= require_tree .
  *= require_self
  */
-
+ 
+ 
+ @import "bootstrap";
+ 
  .navbar-default {
 	.dropdown-menu.notify-drop {
 		min-width: 330px;
@@ -125,3 +128,4 @@
 		}
 	}
 }
+
