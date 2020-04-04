@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_04_015500) do
+ActiveRecord::Schema.define(version: 2020_04_04_020357) do
 
   create_table "friendships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "friend_id"
@@ -41,6 +41,10 @@ ActiveRecord::Schema.define(version: 2020_04_04_015500) do
     t.boolean "joined", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "order_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["order_id"], name: "index_invites_on_order_id"
+    t.index ["user_id"], name: "index_invites_on_user_id"
   end
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -85,6 +89,8 @@ ActiveRecord::Schema.define(version: 2020_04_04_015500) do
   add_foreign_key "groups", "users"
   add_foreign_key "groups_users", "groups"
   add_foreign_key "groups_users", "users"
+  add_foreign_key "invites", "orders"
+  add_foreign_key "invites", "users"
   add_foreign_key "items", "orders"
   add_foreign_key "items", "users"
   add_foreign_key "orders", "users"
