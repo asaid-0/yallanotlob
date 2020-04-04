@@ -9,11 +9,17 @@ class GroupsController < ApplicationController
 
   def create
     if (params[:name].present?)
-    @new_group= Group.new;
-    @new_group.name = params[:name]
-    @new_group.description = params[:name]
-    @new_group.user_id = current_user.id
-    @new_group.save
+      current_user.groups.each do |group|
+        if group.name == params[:name]
+            flash[:group_error] = "Group alreay exists"
+            return redirect_back(fallback_location: root_path)
+          end
+        end
+      @new_group= Group.new;
+      @new_group.name = params[:name]
+      @new_group.description = params[:name]
+      @new_group.user_id = current_user.id
+      @new_group.save
     end
     redirect_back(fallback_location: root_path)
   end
