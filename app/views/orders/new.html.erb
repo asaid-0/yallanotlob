@@ -1,6 +1,9 @@
+<div class="container">
    <div class="row">
 
-    <div class="mr-3 col">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+    
+    <div class="col-lg-5">
             <div id='form' class='_form'>
             <% if !@order.errors.full_messages.empty? %>
                 <div class="alert alert-danger">
@@ -14,9 +17,10 @@
             <%= render partial: 'form', locals: { btn: 'Save', btnc: 'success' } %>    
             </div>
         </div>
-    <div class="p-3 col invited-container">
+    <div class="p-3 col-lg-7 invited-container">
 
           <div class="d-flex .align-content-around flex-wrap" id="invited">
           </div>
     </div>
+  </div>
   </div>
