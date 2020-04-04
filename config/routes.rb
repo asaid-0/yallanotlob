@@ -6,6 +6,7 @@ resources :orders
   delete 'groups_users/destroy/:id' , to: 'groups_users#destroy', as: :remove_user
 
   resources :groups
+  resources :friends
   get  'users/index',to:"users#index"
   get 'search/groups', to: "orders#searchGroups"
   get 'search/friends', to: "orders#searchFriends"
