@@ -4,5 +4,9 @@ class Order < ApplicationRecord
     validates :name, :restaurant, :menu, presence: true
     has_many :items
     has_many :users, through: :items
+
+    has_many :invites
+    has_many :users, through: :invites
+
     belongs_to :user
 end
