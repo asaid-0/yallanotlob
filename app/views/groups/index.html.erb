@@ -8,6 +8,11 @@
                 <br />
                 <%= submit_tag "Create", class: "btn btn-outline-info " %>
                 <% end %>
+                <%if flash[:group_error].present?%>
+                <div class="alert alert-danger">
+                    <%= flash[:group_error] %>
+                </div>
+                <%end%>
             </div>
         </div>
     </div>
@@ -29,6 +34,11 @@
         </div>
         <% if defined? (@group) %>
         <div class="col-sm-6" style="border-style: solid;">
+            <%if flash[:friend_error].present?%>
+            <div class="alert alert-danger">
+                <%= flash[:friend_error] %>
+            </div>
+            <% end %>
             <h4><%= @group.name %> </h4>
             <h5>Add friends </h5>
             <div class="form-group">
