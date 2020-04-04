@@ -13,27 +13,15 @@
   </head>
 
   <body>
-  <style>
-      .row, nav, .container-fluid{
-        display: block !important;
-      }
-      .navbar-right {
-        position: absolute !important;
-        right: 1.5rem;
-      }
-      .dropdown-menu{
-        position: absolute !important;
-      }
-      
-  </style>
+
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
   <div class="container">
-	<div class="row">
-		<nav style="padding: 0" class="navbar navbar-default">
-  <div class="container-fluid">
+	<div style="display: block !important;" class="row">
+		<nav style="padding: 0; display: block !important;" class="navbar navbar-default">
+  <div style="display: block !important;" class="container-fluid">
 
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -53,10 +41,10 @@
         <li><a href="<%= groups_path %>">Groups</a></li>
         <li><a href="#">Orders</a></li>
       </ul>
-      <ul style="display: block" class="nav navbar-nav navbar-right">
+      <ul style="display: block; position: absolute !important; right: 1.5rem;" class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i>Notification (<b>2</b>)</a>
-          <ul class="dropdown-menu notify-drop">
+          <ul style="position: absolute !important;" class="dropdown-menu notify-drop">
             <div class="notify-drop-title">
             	<div class="row">
             		<div class="col-md-6 col-sm-6 col-xs-6">Bildirimler (<b>2</b>)</div>
@@ -111,7 +99,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
           <span class="glyphicon">&#xe008;</span>UserName <span class="caret"></span></a>
-          <ul class="dropdown-menu">
+          <ul style="position: absolute !important;" class="dropdown-menu">
             <li><a href="#">My Profile</a></li>
             <li role="separator" class="divider"></li>
             <li><%= link_to 'logout', destroy_user_session_path, method: :delete%></li>
