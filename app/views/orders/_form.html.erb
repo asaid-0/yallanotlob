@@ -74,7 +74,7 @@ const addfriend = (id, name, type) => {
         </div>`)
 
       $('#invite-inputs').append(`
-        <input id="${type}_${id}" type="text" name="${type == 'user' ? 'invites[friends][]' : 'invites[groups][]'}" value="${id}" hidden>
+        <input id="${type}_${id}" type="text" name="${type == 'user' ? 'friends[]' : 'groups[]'}" value="${id}" hidden>
       `)
     }
   }
