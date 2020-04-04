@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   def index
+    p Current_user
   end
 
   def new

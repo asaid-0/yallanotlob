@@ -2,6 +2,7 @@
 
 class Users::SessionsController < Devise::SessionsController
   layout "auth", only: [:new, :edit]
+  skip_before_action :require_login, only: [:new, :create]
 
   # before_action :configure_sign_in_params, only: [:create]
 
