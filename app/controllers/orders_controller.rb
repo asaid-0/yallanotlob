@@ -9,14 +9,25 @@ class OrdersController < ApplicationController
 
     @order = User.first.orders.new(order_params)
     if @order.save
-      # create invites
+      # create invites for friends
       friends_params.each do |id|
-        @add_invite = @order.invites.new
-        @add_invite.user_id = id
-        @add_invite.save();
+        if @order.invites.where(user_id: id).empty?
+          @add_invite = @order.invites.new
+          @add_invite.user_id = id
+          @add_invite.save();
+        end
+      end
+      # create invites for groups
+      groups_params.each do |id|
+        Group.find(id).users.each do |user|
+          if @order.invites.where(user_id: user.id).empty?
+            @add_invite = @order.invites.new
+            @add_invite.user_id = user.id
+            @add_invite.save();
+          end
+        end
       end
       redirect_to orders_path, notice: "The #{@order.name} Order from #{@order.restaurant} has been created."
-        
     else
         render "new"
     end
