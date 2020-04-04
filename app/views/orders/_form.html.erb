@@ -1,0 +1,143 @@
+<%# <%= stylesheet_link_tag "orderform", :media => "all" %> 
+        <%# <form action='' method='POST' enctype="multipart/form-data" name='addProduct'> %>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script>
+        <%= form_for(@order, url: @order, html: { multipart: true }) do |f| %>
+          <fieldset id="select-menu">
+            <legend class="category">ORDER FOR</legend>
+            <label class='input-select'>
+                <select name='order[name]'>
+                  <option selected='selected' value="breakfast">Breakfast</option>
+                  <option value="lunch">Lunch</option>
+                </select>
+              </label>
+          </fieldset>
+          
+          <fieldset>
+            <legend>RESTAURANT NAME</legend>
+            <%= f.text_field :restaurant, placeholder: "Restaurant Name...", autofocus: true %>
+          </fieldset>
+
+          <fieldset>
+            <legend>INVITE FRIEND</legend>
+            <%# <div class="inner-addon right-addon">
+              <i id="addfriend" class="fa fa-plus text-success"></i>
+              <input id="friend" type="text" placeholder="Friend Name..."  />
+            </div> %>
+
+            <div class="nav-search">
+            <div class="search-input">
+              <i class="material-icons search-icon fa fa-search"></i>
+              <input type="text" autocomplete="off" id="search-input" />
+                <div class="search-dropdown" id="hits-container">
+                  
+                    <ul id="friendsSearch">
+                    </ul>
+                 
+                </div>
+              <i class="close-search material-icons fa fa-close"></i>
+            </div>
+            </div>
+
+
+
+          </fieldset>
+
+          
+
+          <fieldset>
+            <legend>MENU</legend>
+            <label for="file" class="file-upload">
+              <span class="fa fa-cloud-upload"><span> Upload
+            </label>
+            <%# <input type='file' name='file' id="file" /> %>
+            <%= f.file_field :menu, id: 'file' %>
+            
+
+          </fieldset>
+
+          <div id="invite-inputs">
+
+          </div>
+
+          <input type='submit' name='submit' value='Add' />
+        <% end %>
+
+        <script>
+const addfriend = (id, name, type) => {
+  if($(`#${type}_${id}`).length === 0){
+    $('#invited').append(`<div class="mr-3 p-3 card bg-light text-dark shadow-sm p-3 mb-5 bg-white rounded">
+        <ul class="ml-3">
+          <div class="mb-2"><li class="fa fa-hashtag"> ${id}</li></div>
+          <div class="mb-2"><li class="fa fa-${type}"> ${name}</li></div>
+          <div class="remove-btn text-danger" onclick="$(this).parent().parent().remove(); $('#${type}_${id}').remove()">remove</div>
+        </ul>
+        </div>`)
+
+      $('#invite-inputs').append(`
+        <input id="${type}_${id}" type="text" name="${type == 'user' ? 'invites[friends][]' : 'invites[groups][]'}" value="${id}" hidden>
+      `)
+    }
+  }
+  $(function() {
+    const updateFriends = (friends) => {
+
+      $('#friendsSearch').empty();
+      friends.map(friend => {
+        console.log(friend);
+        $('#friendsSearch').append(`<li class="mr-3 mb-3 pt-4 pb-4 friend-item fa ${friend.email ? 'fa-user' : 'fa-group'} m-0 list-group-item" onclick="${friend.email ? `addfriend(${friend.id}, '${friend.name}', 'user')` : `addfriend(${friend.id}, '${friend.name}', 'group')`}; $(this).remove()"> ${friend.name}</li>`);
+      })
+    }
+
+
+    async function getFriends(){
+      const res = await fetch("/search/friends.json");
+      return (await res.json());
+      
+    }
+    async function getGroups(){
+      const res = await fetch("/search/groups.json");
+      return (await res.json());
+    }
+
+    getFriends().then(allFriends => getGroups().then(allGroups => searchEvents(allFriends.concat(allGroups))));
+
+    function searchEvents(list){
+
+      const searchList = list;
+
+      $('#search-input').on('focus', function() {
+      $('.nav-search').addClass('active');
+    })
+
+    $('#search-input').on('textInput input', function() {
+      const filtered = searchList.filter(friend => friend.name.toLowerCase().includes($(this).val().toLowerCase()));
+      // console.log(filteredFreinds);
+      updateFriends(filtered);
+    })
+
+    $('#search-input').on('keyup', function() {
+      $('#hits-container').scrollTop(0);
+    })
+
+    $('.close-search').on('click', function(evt) {
+      evt.preventDefault();
+      $('#friendsSearch').empty();
+      $('#search-input').val('');
+       $('.nav-search').removeClass('active');
+     })
+
+   $('#search-input').on('blur', function(evt) {
+     if(!evt.isDefaultPrevented) {
+       console.log("blur");
+      $('.nav-search').removeClass('active');
+      $('#friendsSearch').empty();
+     }
+    })
+
+  }
+
+});
+
+
+        </script>
+
