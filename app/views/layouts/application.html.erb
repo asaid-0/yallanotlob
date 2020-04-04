@@ -7,17 +7,32 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  
+  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
   <body>
+  <style>
+      .row, nav, .container-fluid{
+        display: block !important;
+      }
+      .navbar-right {
+        position: absolute !important;
+        right: 1.5rem;
+      }
+      .dropdown-menu{
+        position: absolute !important;
+      }
+      
+  </style>
+
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <div class="container">
 	<div class="row">
-		<nav class="navbar navbar-default">
+		<nav style="padding: 0" class="navbar navbar-default">
   <div class="container-fluid">
 
     <div class="navbar-header">
@@ -32,13 +47,13 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+      <ul style="display: block" class="nav navbar-nav">
+        <li class="active"><a href=<%= users_index_path %>>Home <span class="sr-only">(current)</span></a></li>
         <li><a href="#">Friends</a></li>
-        <li><a href="#">Groups</a></li>
+        <li><a href="<%= groups_path %>">Groups</a></li>
         <li><a href="#">Orders</a></li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
+      <ul style="display: block" class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i>Notification (<b>2</b>)</a>
           <ul class="dropdown-menu notify-drop">

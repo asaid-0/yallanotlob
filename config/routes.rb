@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 resources :orders
   root 'welcome#index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  
+  post 'groups_users' , to: 'groups_users#create'
+  delete 'groups_users/destroy/:id' , to: 'groups_users#destroy', as: :remove_user
+
+  resources :groups
   get  'users/index',to:"users#index"
   get 'search/groups', to: "orders#searchGroups"
   get 'search/friends', to: "orders#searchFriends"
