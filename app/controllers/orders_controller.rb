@@ -10,8 +10,7 @@ class OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     if params[:link] === "finish"
-      @link = params[:link]
-      @order.status = 0
+      @order.status = 1
       @order.save
       @message = "Your Order is Finished"
     else
@@ -19,8 +18,8 @@ class OrdersController < ApplicationController
       @order.save
       @message = "Your Order is Cancelled"
     end
-    # flash.alert = @message
-    # redirect_back fallback_location: root_path
+    flash.alert = @message
+    redirect_back fallback_location: root_path
   end
 
   def new
