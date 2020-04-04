@@ -3,10 +3,17 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @order = Order.new
+    @order = User.first.orders.new
   end
   def create
-    
+
+    @order = User.first.orders.new(order_params)
+    if @order.save
+        redirect_to orders_path, notice: "The #{@order.name} Order from #{@order.restaurant} has been created."
+    else
+        render "new"
+    end
+    @order.save
   end
   def searchGroups
     # @groups = User.all

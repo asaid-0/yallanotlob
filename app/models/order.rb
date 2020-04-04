@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
     enum status: [ :waiting, :finished, :cancelled ]
-    mount_uploader :attachment, AttachmentUploader
+    mount_uploader :menu, AttachmentUploader
     validates :name, :restaurant, :menu, presence: true
     has_many :items
     has_many :users, through: :items
