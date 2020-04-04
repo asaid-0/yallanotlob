@@ -1,5 +1,26 @@
 class OrdersController < ApplicationController
   def index
+    # user orders
+    @user_orders =  Order.where(user_id: current_user.id)
+    # user invited-orders
+    @user_invited_orders_ids = Invite.where("user_id = ?" , current_user.id).pluck(:order_id)
+    @user_invited_orders = Order.where("id = ?" , @user_invited_orders_ids)
+  end
+
+  def update
+    @order = Order.find(params[:id])
+    if params[:link] === "finish"
+      @link = params[:link]
+      @order.status = 0
+      @order.save
+      @message = "Your Order is Finished"
+    else
+      @order.status = 2
+      @order.save
+      @message = "Your Order is Cancelled"
+    end
+    # flash.alert = @message
+    # redirect_back fallback_location: root_path
   end
 
   def new
