@@ -1,0 +1,29 @@
+<div class="container">
+    <h4>Add New Friend</h4>
+    <div class="row">
+        <div class="col-sm-6" style="">
+            <div class="form-group">
+                <%= form_tag(friends_path, method: "post") do %>
+                <%= text_field_tag(:email, nil, placeholder: "Friend Email...", class: "form-control") %>
+                <br />
+                <%= submit_tag "Add Friend", class: "btn btn-outline-info " %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+            <div class="col-sm-12" style="">
+                <% @friends.each do |friend| %>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= friend.email %></h5>
+                        <%= link_to 'Unfriend', friend_path(friend), method: :delete %>
+                        <br>
+                    </div>
+                </div>
+
+                <% end %>
+            </div>
+        </div>
+    </div>

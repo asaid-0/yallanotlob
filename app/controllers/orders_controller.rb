@@ -1,13 +1,33 @@
 class OrdersController < ApplicationController
   def index
+    # user orders
+    @user_orders =  Order.where(user_id: current_user.id)
+    # user invited-orders
+    @user_invited_orders_ids = Invite.where("user_id = ?" , current_user.id).pluck(:order_id)
+    @user_invited_orders = Order.where("id = ?" , @user_invited_orders_ids)
+  end
+
+  def update
+    @order = Order.find(params[:id])
+    if params[:link] === "finish"
+      @order.status = 1
+      @order.save
+      @message = "Your Order is Finished"
+    else
+      @order.status = 2
+      @order.save
+      @message = "Your Order is Cancelled"
+    end
+    flash.alert = @message
+    redirect_back fallback_location: root_path
   end
 
   def new
-    @order = User.first.orders.new
+    @order = current_user.orders.new
   end
   def create
 
-    @order = User.first.orders.new(order_params)
+    @order = current_user.orders.new(order_params)
     if @order.save
       # create invites for friends
       friends_params.each do |id|
@@ -33,7 +53,7 @@ class OrdersController < ApplicationController
     end
   end
   def searchGroups
-    @groups = User.first.groups.all
+    @groups = current_user.groups.all
     respond_to do |format|
       format.html { render :index }
       format.json { render json: @groups }
@@ -41,13 +61,11 @@ class OrdersController < ApplicationController
     
   end
   def searchFriends
-    @users = User.all
-    @users = User.first.friends.all
+    @users = current_user.friends.all
     respond_to do |format|
       format.html { render :index }
       format.json { render json: @users }
     end
-    
   end
 
   private
