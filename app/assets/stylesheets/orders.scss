@@ -463,3 +463,52 @@ span.error{
     border-top-width: 1px !important;
 }
 //  end search friends
+
+// start user orders
+/*orders table styling*/
+.orders-table , .calculate{
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #f5f5f5;
+    border-top: 1rem solid #000;
+    box-shadow: 0.5rem 0.5rem 0.25rem rgba(0, 0, 0, .1);
+    border-left: 1px solid #e3e3e3;
+}
+.orders-table th {
+    padding: 1.2rem;
+    text-align: center;
+    color: black;
+}
+.data-row:hover {
+    background-color: #fafafa;
+    border-color: #e1e1e1;
+    border: 0.2rem solid black;
+}
+.orders-table tr{
+    padding: 1rem;
+    text-align: center;
+}
+td a {
+    margin-right: 1rem;
+    color:black;
+    text-decoration: none;
+    /* font-size: 1.2rem; */
+}
+td a:hover{
+    text-decoration: underline;
+}
+/* ***************************** */
+/* items style */
+/* **************************** */
+.items {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content:space-around;
+}
+.item {
+    flex: 0 20%;
+    margin-right: .4rem;
+    padding: .3rem;
+    background-color: #fff;
+}
+// end user orders
