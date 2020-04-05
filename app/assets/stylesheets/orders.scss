@@ -178,22 +178,27 @@ h1 {
 }
 
 #form {
-	position: relative;
+	// position: relative;
 	background: #fff;
-	max-width: 500px;
-	margin: auto;
+	min-width: 400px;
+    // margin: 0 auto;
+    margin-top: 1rem;
 	padding: 25px;
 	border-top: 8px solid #000;
 	border-radius: 13px;
     box-shadow: 2px 2px 1px rgba(0, 0, 0, .1);
     border-left: 1px solid #e3e3e3;
+    // margin-right: 10rem;
 }
 
+
 .invited-container {
-	position: relative;
+	// position: relative;
 	background: #fff;
-	max-width: 500px;
-	margin: 0 auto;
+	min-width: 400px;
+    // margin: 0 auto;
+    height: 100%;
+    margin-top: 1rem;
 	padding: 25px;
 	border-top: 8px solid #000;
 	border-radius: 13px;
@@ -428,7 +433,8 @@ span.error{
 }
 
 .friend-item{
-    cursor: pointer;   
+    cursor: pointer;  
+    display: inline-block !important; 
 
 }
 

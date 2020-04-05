@@ -23,11 +23,11 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @order = User.first.orders.new
+    @order = current_user.orders.new
   end
   def create
 
-    @order = User.first.orders.new(order_params)
+    @order = current_user.orders.new(order_params)
     if @order.save
       # create invites for friends
       friends_params.each do |id|
@@ -53,7 +53,7 @@ class OrdersController < ApplicationController
     end
   end
   def searchGroups
-    @groups = User.first.groups.all
+    @groups = current_user.groups.all
     respond_to do |format|
       format.html { render :index }
       format.json { render json: @groups }
@@ -61,13 +61,11 @@ class OrdersController < ApplicationController
     
   end
   def searchFriends
-    @users = User.all
-    @users = User.first.friends.all
+    @users = current_user.friends.all
     respond_to do |format|
       format.html { render :index }
       format.json { render json: @users }
     end
-    
   end
 
   private

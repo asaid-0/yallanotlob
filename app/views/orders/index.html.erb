@@ -1,10 +1,6 @@
 <div class="container">
 
-   <% if !flash[:notice].blank? %>
-   <div class="alert alert-info">
-      <%= flash[:notice] %>
-   </div>
-   <% end %>
+   <a href="<%= new_order_path %>"><button class="btn btn-secondary m-3 float-right">New</button></a>
 
    
    <% flash.each do |type, msg| %>
