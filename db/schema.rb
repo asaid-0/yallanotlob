@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2020_04_04_020357) do
     t.index ["user_id"], name: "index_groups_users_on_user_id"
   end
 
-  create_table "invites", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "invites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.boolean "joined", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -87,4 +87,11 @@ class OrdersController < ApplicationController
         return []
       end
 
+
+
+
+      def show
+        @order = Order.find(1)
+      end
+
 end
