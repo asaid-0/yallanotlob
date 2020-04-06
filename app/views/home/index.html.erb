@@ -1,0 +1,29 @@
+<%= link_to("Sign In" , new_user_session_path , method: :get) %>
+<%= link_to("Sign up" , new_user_registration_path , method: :get) %>
+
+<% if user_signed_in? %>
+<%= link_to 'logout', destroy_user_session_path, method: :delete%>
+<% end %>
+<div class="container">
+    <div class="row">
+        <div class="p-4 col-lg-5 invited-container">
+            <p class="text-dark">Latest Orders</p>
+            <%# invited orders with status waiting %>
+
+            <% @latest.each do |order| %>
+                <p><a href="/orders/<%= order.id %>">Order for <%= order.name %> on <%= order.created_at %></a></p>
+            <% end %>
+            
+        </div>
+        
+        <div class="p-4 col-lg-6 col-md-offset-1 invited-container">
+            <p class="text-dark">Friends Activities</p>
+            <%# friends activities on orders if user's invited %>
+            <% @activities.each do |a| %>
+                <p>
+                    <a href="/orders/<%= a.order_id %>"><%= a.text %></a>
+                </p>
+            <% end %>
+        </div>
+  </div>
+</div>
