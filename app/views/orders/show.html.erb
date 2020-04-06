@@ -1,6 +1,117 @@
-<div class="card text-white bg-success">
-  <div class="card-body">
-    <h4 class="card-title"><%= @order.name %>
-    </h4>
+<style>
+  /*---- 	BLOG SECTION ----*/
+  
+  
+  
+  .post header{
+  	padding:20px;
+  }
+  
+  
+  .post-details{
+      position:relative;
+  		font-size: 15px;
+  }
+  
+  
+  .post-comment-budge{
+  	height: 70px;
+  	width: 70px;
+  	position: absolute;
+  	top: 5px;
+  	right:0;
+  	border: none;
+  	border-radius: 100%;
+  	background-color: #000;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+  }
+  
+  .post-comment-budge a ,.post-comment-budge a:hover{
+  	color: white;
+  	font-size: 20px;
+  	line-height: 20px;
+  	text-decoration: none;
+  }
+  
+  
+  .post-comment-budge .fa-thumbs-up{
+  	display: block;
+  	font-size: 15px;
+  	padding:0;
+  	margin-bottom: 4px;
+  
+  }
+  
+  .post-comment-budge:hover{
+  	background-color: #313030;
+  }
+</style>
+<div class="container">
+  <header>
+    <div class="post-details">
+      <strong style="text-transform:uppercase"> <%= @order.name %> </strong>
+      <i class="fa fa-user ml-3" aria-hidden="true"></i>
+      <span class="text-muted"> <%= @order.user.name %> </span>
+      <i class="fa fa-clock-o ml-3" aria-hidden="true"></i>
+      <time class="text-muted">  <%= @order.user.created_at %> </time>
+      <i class="fa fa-cutlery ml-3" aria-hidden="true"></i>
+      <span class="text-muted"> <%= @order.restaurant %></span>
+      <div class="post-comment-budge">
+        <span class="fa fa-thumbs-up"></span>
+        <%= @order.invites.where(joined: false).count %>
+      </div>
+    </div>
+    <hr>
+  </header>
+  <div id="content" >
+    <article class="post">
+      <div class="row">
+        <div class="col-md-4"><img src="<%= @order.menu %>" class="img-fluid" alt="menu" width="340px"></div>
+        <div class="col-md-4">
+          <h4>Order Items :</h4>
+          <table class="table">
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Comment</th>
+              <th>User</th>
+            </tr>
+            <% @order.items.each do |item| %>
+              <tr>
+                <td><%= item.item %></td>
+                <td><%= item.price %></td>
+                <td><%= item.quantity %></td>
+                <td><%= item.comment %></td>
+                <td><%= item.user.name %></td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+        <div class="col-md-4">
+          <h4>Joined Friends :</h4>
+          <table class="table">
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Actions</th>
+            </tr>
+            
+            <% @order.invites.where(joined: false).each do |item| %>
+              <tr>
+                <td><%= item.user.name %></td>
+                <td><%= item.user.email %></td>
+                <td><button class="btn btn-danger button-small">Delete</button></td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    </article>
   </div>
+  <!-- col -->
 </div>

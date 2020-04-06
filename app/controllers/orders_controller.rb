@@ -67,7 +67,13 @@ class OrdersController < ApplicationController
       format.json { render json: @users }
     end
   end
+  
 
+  def show
+    @order = Order.find(1)
+  end
+
+  
   private
       def order_params
         params.require(:order).permit(:name, :menu, :restaurant)
@@ -89,9 +95,5 @@ class OrdersController < ApplicationController
 
 
 
-
-      def show
-        @order = Order.find(1)
-      end
 
 end
