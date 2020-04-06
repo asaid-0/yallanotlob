@@ -6,6 +6,11 @@
                 <%= form_tag(friends_path, method: "post") do %>
                 <%= text_field_tag(:email, nil, placeholder: "Friend Email...", class: "form-control") %>
                 <br />
+                <%if flash[:friend_error].present?%>
+                <div class="alert alert-danger">
+                <%= flash[:friend_error] %>
+                </div>
+                <% end %>
                 <%= submit_tag "Add Friend", class: "btn btn-outline-info " %>
                 <% end %>
             </div>
