@@ -13,6 +13,7 @@ class FriendsController < ApplicationController
               @new_friendship.user_id = current_user.id
               @new_friendship.friend_id = User.find_by(email: params[:email]).id
               @new_friendship.save
+              flash[:friend_succes] = "Friend Added Successfully !"
             else
               flash[:friend_error] = "You already Have this friend in your list"
             end
