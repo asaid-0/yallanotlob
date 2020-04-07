@@ -50,7 +50,7 @@
   	background-color: #313030;
   }
 </style>
-<div class="container">
+<div class="container-fluid">
   <header>
     <div class="post-details">
       <strong style="text-transform:uppercase"> <%= @order.name %> </strong>
@@ -62,15 +62,25 @@
       <span class="text-muted"> <%= @order.restaurant %></span>
       <div class="post-comment-budge">
         <span class="fa fa-thumbs-up"></span>
-        <%= @order.invites.where(joined: false).count %>
+        <%= @order.invites.where(joined: true).count %>
       </div>
     </div>
     <hr>
   </header>
+  <% flash.each do |type, msg| %>
+    <% if type == "notice" %>
+      <div class="alert alert-success ">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong><%= msg %></strong>
+      </div>
+    <% end %>
+  <% end %>
   <div id="content" >
     <article class="post">
       <div class="row">
         <div class="col-md-4"><img src="<%= @order.menu %>" class="img-fluid" alt="menu" width="340px"></div>
+
+
         <div class="col-md-4">
           <h4>Order Items :</h4>
           <table class="table">
@@ -80,6 +90,7 @@
               <th>Quantity</th>
               <th>Comment</th>
               <th>User</th>
+              <th>Action</th>
             </tr>
             <% @order.items.each do |item| %>
               <tr>
@@ -88,28 +99,66 @@
                 <td><%= item.quantity %></td>
                 <td><%= item.comment %></td>
                 <td><%= item.user.name %></td>
+                <% if item.user == current_user ||@order.user == current_user %>
+                  <td><%= link_to 'Delete', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <% end %>
               </tr>
             <% end %>
           </table>
+          <p id="notice"><%= notice %></p>
+
+          <% if @order.status != "cancelled" && @order.status != "finished" && @order.invites.where({joined: true, user_id: current_user.id}).count>0  %>
+            <% flash.each do |type, msg| %>
+              <% if type == "error" %>
+                <div class="alert alert-danger ">
+                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                  <strong><%= msg %></strong>
+                </div>
+              <% end %>
+            <% end %>
+            <%= form_for :item, url: {:controller=>"items" ,:action=>"create"} do |f| %>
+              <div class="form-group">
+                <%= f.text_field :item ,placeholder:"item name" , class:"form-control mt-5"%>
+              </div>
+              <div class="form-group">
+                <%= f.text_field :quantity ,placeholder:"item quantity" , class:"form-control mt-5"%>
+                <div class="form-group">
+                  <%= f.text_field :price ,placeholder:"item price" , class:"form-control mt-5"%>
+                </div>
+                <div class="form-group">
+                  <%= f.text_field :comment ,placeholder:"your comment" , class:"form-control mt-5"%>
+                </div>
+                <%= f.hidden_field :user_id, value:current_user.id %>
+                <%= f.hidden_field :order_id, value:@order.id %>
+                <%= f.submit 'Add Item', class:"btn btn-primary"%>
+              <% end %>
+            <% end %>
+          </div>
         </div>
-        <div class="col-md-4">
-          <h4>Joined Friends :</h4>
-          <table class="table">
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Actions</th>
-            </tr>
-            
-            <% @order.invites.where(joined: false).each do |item| %>
+
+        
+        <% if current_user == @order.user %>
+          <div class="col-md-4">
+            <h4>Pending Requests :</h4>
+            <table class="table">
               <tr>
-                <td><%= item.user.name %></td>
-                <td><%= item.user.email %></td>
-                <td><button class="btn btn-danger button-small">Delete</button></td>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
               </tr>
-            <% end %>
-          </table>
-        </div>
+              <% @order.invites.where(joined: false).each do |item| %>
+                <tr>
+                  <td><%= item.user.name %></td>
+                  <td><%= item.user.email %></td>
+                  <td>
+                    <%= link_to 'Delete', remove_invitation_path(item), method: :delete %>
+                  </td>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+        <% end %>
+        
       </div>
     </article>
   </div>
