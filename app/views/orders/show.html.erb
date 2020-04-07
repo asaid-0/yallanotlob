@@ -49,17 +49,21 @@
   .post-comment-budge:hover{
   	background-color: #313030;
   }
+  .post-details{
+    background-color: whitesmoke;
+  }
+  
 </style>
 <div class="container-fluid">
   <header>
     <div class="post-details">
       <strong style="text-transform:uppercase"> <%= @order.name %> </strong>
       <i class="fa fa-user ml-3" aria-hidden="true"></i>
-      <span class="text-muted"> <%= @order.user.name %> </span>
+      <span > <%= @order.user.name %> </span>
       <i class="fa fa-clock-o ml-3" aria-hidden="true"></i>
-      <time class="text-muted">  <%= @order.user.created_at %> </time>
+      <time >  <%= @order.user.created_at %> </time>
       <i class="fa fa-cutlery ml-3" aria-hidden="true"></i>
-      <span class="text-muted"> <%= @order.restaurant %></span>
+      <span style="color: ;"> <%= @order.restaurant %></span>
       <div class="post-comment-budge">
         <span class="fa fa-thumbs-up"></span>
         <%= @order.invites.where(joined: true).count %>
@@ -81,9 +85,9 @@
         <div class="col-md-4"><img src="<%= @order.menu %>" class="img-fluid" alt="menu" width="340px"></div>
 
 
-        <div class="col-md-4">
+        <div class="col-md-4" style="color: whitesmoke;">
           <h4>Order Items :</h4>
-          <table class="table">
+          <table class="orders-table" >
             <tr>
               <th>Name</th>
               <th>Price</th>
@@ -138,9 +142,9 @@
 
         
         <% if current_user == @order.user %>
-          <div class="col-md-4">
+          <div class="col-md-4" style="color: whitesmoke;">
             <h4>Pending Requests :</h4>
-            <table class="table">
+            <table class="orders-table">
               <tr>
                 <th>Name</th>
                 <th>Email</th>
