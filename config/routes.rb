@@ -18,6 +18,9 @@ Rails.application.routes.draw do
 
 
   resources :friends
+
+  # get '/users' => 'users#index', as: :user_root # creates user_root_path
+
   get  'users/index',to:"users#index"
   get 'search/groups', to: "orders#searchGroups"
   get 'search/friends', to: "orders#searchFriends"
