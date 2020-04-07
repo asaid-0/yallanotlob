@@ -194,7 +194,7 @@ h1 {
 
 .invited-container {
 	// position: relative;
-	background: #fff;
+	background-color: rgba($color: #fff, $alpha: 1);
 	min-width: 400px;
     // margin: 0 auto;
     height: 100%;
@@ -477,6 +477,9 @@ span.error{
     font-size: 4rem;
 }
 .orders-table , .calculate{
+    display: block;
+    padding: 1rem;
+    border-radius: 1rem;
     border-collapse: collapse;
     width: 100%;
     // background-color: #f5f5f5;
