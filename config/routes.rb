@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  resources :items
+
+
   resources :orders
     root 'welcome#index'
     
@@ -6,7 +10,13 @@ Rails.application.routes.draw do
   post 'groups_users' , to: 'groups_users#create'
   delete 'groups_users/destroy/:id' , to: 'groups_users#destroy', as: :remove_user
 
+
+
   resources :groups
+  
+  delete 'orders_users/destroy/:id' , to: 'orders_users#destroy', as: :remove_invitation
+
+
   resources :friends
   get  'users/index',to:"users#index"
   get 'search/groups', to: "orders#searchGroups"
