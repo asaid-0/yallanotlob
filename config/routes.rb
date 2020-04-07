@@ -4,8 +4,8 @@ Rails.application.routes.draw do
 
 
   resources :orders
-    root 'welcome#index'
-    
+  root 'home#index'
+  
 
   post 'groups_users' , to: 'groups_users#create'
   delete 'groups_users/destroy/:id' , to: 'groups_users#destroy', as: :remove_user

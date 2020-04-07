@@ -7,6 +7,7 @@ class Order < ApplicationRecord
 
     has_many :invites
     has_many :users, through: :invites
+    has_many :activities
 
     belongs_to :user
 end
