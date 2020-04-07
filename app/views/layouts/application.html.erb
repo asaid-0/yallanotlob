@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Yallanotlob</title>
     <%= csrf_meta_tags %>
@@ -54,7 +55,9 @@
 
                                     <div class="drop-content">
                                         <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
+                                            <div class="col-md-3 col-sm-3 col-xs-3">
+                                                <div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
+                                            </div>
                                             <div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Ahmet</a> yorumladı. <a href="">Çicek bahçeleri...</a> <a href="" class="rIcon"><i class="fa fa-dot-circle-o"></i></a>
 
                                                 <hr>
@@ -62,28 +65,36 @@
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
+                                            <div class="col-md-3 col-sm-3 col-xs-3">
+                                                <div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
+                                            </div>
                                             <div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Ahmet</a> yorumladı. <a href="">Çicek bahçeleri...</a> <a href="" class="rIcon"><i class="fa fa-dot-circle-o"></i></a>
                                                 <p>Lorem ipsum sit dolor amet consilium.</p>
                                                 <p class="time">1 Saat önce</p>
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
+                                            <div class="col-md-3 col-sm-3 col-xs-3">
+                                                <div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
+                                            </div>
                                             <div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Ahmet</a> yorumladı. <a href="">Çicek bahçeleri...</a> <a href="" class="rIcon"><i class="fa fa-dot-circle-o"></i></a>
                                                 <p>Lorem ipsum sit dolor amet consilium.</p>
                                                 <p class="time">29 Dakika önce</p>
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
+                                            <div class="col-md-3 col-sm-3 col-xs-3">
+                                                <div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
+                                            </div>
                                             <div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Ahmet</a> yorumladı. <a href="">Çicek bahçeleri...</a> <a href="" class="rIcon"><i class="fa fa-dot-circle-o"></i></a>
                                                 <p>Lorem ipsum sit dolor amet consilium.</p>
                                                 <p class="time">Dün 13:18</p>
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
+                                            <div class="col-md-3 col-sm-3 col-xs-3">
+                                                <div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
+                                            </div>
                                             <div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Ahmet</a> yorumladı. <a href="">Çicek bahçeleri...</a> <a href="" class="rIcon"><i class="fa fa-dot-circle-o"></i></a>
                                                 <p>Lorem ipsum sit dolor amet consilium.</p>
                                                 <p class="time">2 Hafta önce</p>
@@ -111,10 +122,18 @@
         </div>
     </div>
     <script>
-        $(function () {
+        $(function() {
             $('[data-tooltip="tooltip"]').tooltip()
         });
     </script>
     <%= yield %>
+
+    <div class="footer">
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a href="https://github.com/asaid-0/yallanotlob.git"> YallaNotlob.com</a>
+        </div>
+    </div>
+
 </body>
+
 </html>
