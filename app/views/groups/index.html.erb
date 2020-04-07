@@ -9,15 +9,16 @@
                         <%= form_tag(groups_path, method: "post") do %>
                         <%= text_field_tag(:name, nil, placeholder: "Group name...", class: "form-control") %>
                         <br />
+                        <%if flash[:group_error].present?%>
+                        <div class="alert alert-danger">
+                            <%= flash[:group_error] %>
+                        </div>
+                        <%end%>
                         <%= submit_tag "Create", class: "btn btn-outline-info " %>
                         <br>
                         <% end %>
                     </fieldset>
-                    <%if flash[:group_error].present?%>
-                    <div class="alert alert-danger">
-                        <%= flash[:group_error] %>
-                    </div>
-                    <%end%>
+
                     <% @groups.each do |group| %>
                     <div class="mr-3 p-3 card bg-light text-dark shadow-sm p-3 mb-5 bg-white rounded">
                         <ul class="ml-3">
@@ -41,6 +42,7 @@
 
                         <%= form_tag(groups_users_path(@group), method: "post") do %>
                         <%= text_field_tag(:name, nil, placeholder: "Friend name...", class: "form-control") %>
+                        <br />
                         <%if flash[:friend_error].present?%>
                         <div class="alert alert-danger">
                             <%= flash[:friend_error] %>

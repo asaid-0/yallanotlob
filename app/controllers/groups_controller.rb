@@ -4,11 +4,14 @@ class GroupsController < ApplicationController
     if (current_user.groups.exists?(params[:group_id]))
       @group = Group.find_by(id: params[:group_id]) if Group.find_by(id: params[:group_id]) 
     end
-
+    
   end
 
   def create
-    if (params[:name].present?)
+    if (!params[:name].present?)
+      flash[:group_error] = "Group name required"
+      return redirect_back(fallback_location: root_path)
+    else
       current_user.groups.each do |group|
         if group.name == params[:name]
             flash[:group_error] = "Group alreay exists"
