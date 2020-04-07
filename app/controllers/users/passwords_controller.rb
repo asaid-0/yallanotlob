@@ -2,7 +2,10 @@
 
 class Users::PasswordsController < Devise::PasswordsController
   layout 'auth'
+  skip_before_action :require_login
+
   # GET /resource/password/new
+
   # def new
   #     self.resource = resource_class.new
   # end
