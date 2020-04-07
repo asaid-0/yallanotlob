@@ -20,6 +20,12 @@ Register
         <div class="input-group-prepend">
             <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
         </div>
+        <%= f.text_field :name,class:"form-control", placeholder: "Name"  %>
+      </div> <!-- form-group// -->
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+        </div>
         <%= f.email_field :email,class:"form-control", placeholder: "Email" ,autofocus: true, autocomplete: "email" %>
       </div> <!-- form-group// -->
       <div class="form-group input-group">
