@@ -19,9 +19,8 @@ Rails.application.routes.draw do
 
   resources :friends
 
-  # get '/users' => 'users#index', as: :user_root # creates user_root_path
 
-  # get '/auth/:provider/callback', to: 'users#index'
+    # get '/auth/:provider/callback', to: 'users/omniauth_callbacks#facebook'
 
   get  'users/index',to:"users#index"
   get 'search/groups', to: "orders#searchGroups"
@@ -32,7 +31,8 @@ Rails.application.routes.draw do
           passwords: 'users/passwords',
           confirmations: 'users/confirmations',
           unlocks: 'users/unlocks',
+          omniauth: 'users/omniauth',
           :omniauth_callbacks => "users/omniauth_callbacks" 
         }
-        # omniauth: 'users/omniauth',
+        
 end
