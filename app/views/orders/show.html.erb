@@ -66,7 +66,7 @@
       <span style="color: ;"> <%= @order.restaurant %></span>
       <div class="post-comment-budge">
         <span class="fa fa-thumbs-up"></span>
-        <%= @order.invites.where(joined: true).count %>
+        &nbsp<%= @order.invites.where(joined: true).count %>
       </div>
     </div>
     <hr>
@@ -87,28 +87,30 @@
 
         <div class="col-md-4" style="color: whitesmoke;">
           <h4>Order Items :</h4>
-          <table class="orders-table" >
-            <tr>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Comment</th>
-              <th>User</th>
-              <th>Action</th>
-            </tr>
-            <% @order.items.each do |item| %>
+          <div class="borderbox-container">
+            <table class="orders-table" >
               <tr>
-                <td><%= item.item %></td>
-                <td><%= item.price %></td>
-                <td><%= item.quantity %></td>
-                <td><%= item.comment %></td>
-                <td><%= item.user.name %></td>
-                <% if item.user == current_user ||@order.user == current_user %>
-                  <td><%= link_to 'Delete', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                <% end %>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Comment</th>
+                <th>User</th>
+                <th>Action</th>
               </tr>
-            <% end %>
-          </table>
+              <% @order.items.each do |item| %>
+                <tr>
+                  <td><%= item.item %></td>
+                  <td><%= item.price %></td>
+                  <td><%= item.quantity %></td>
+                  <td><%= item.comment %></td>
+                  <td><%= item.user.name %></td>
+                  <% if item.user == current_user ||@order.user == current_user %>
+                    <td><%= link_to 'Delete', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </table>
+          </div>
           <p id="notice"><%= notice %></p>
 
           <% if @order.status != "cancelled" && @order.status != "finished" && @order.invites.where({joined: true, user_id: current_user.id}).count>0  %>
@@ -144,22 +146,24 @@
         <% if current_user == @order.user %>
           <div class="col-md-4" style="color: whitesmoke;">
             <h4>Pending Requests :</h4>
-            <table class="orders-table">
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Actions</th>
-              </tr>
-              <% @order.invites.where(joined: false).each do |item| %>
+            <div class="borderbox-container">
+              <table class="orders-table">
                 <tr>
-                  <td><%= item.user.name %></td>
-                  <td><%= item.user.email %></td>
-                  <td>
-                    <%= link_to 'Delete', remove_invitation_path(item), method: :delete %>
-                  </td>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Actions</th>
                 </tr>
-              <% end %>
-            </table>
+                <% @order.invites.where(joined: false).each do |item| %>
+                  <tr>
+                    <td><%= item.user.name %></td>
+                    <td><%= item.user.email %></td>
+                    <td>
+                      <%= link_to 'Delete', remove_invitation_path(item), method: :delete %>
+                    </td>
+                  </tr>
+                <% end %>
+              </table>
+            </div>
           </div>
         <% end %>
         

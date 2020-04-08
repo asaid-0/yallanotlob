@@ -13,9 +13,54 @@
 </head>
 
 <body>
-
+<time class="timeago" datetime="2020-04-04T03:23:36.423Z">2020-04-04T03:23:36.423Z</time>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <%# timeago plugin %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.6.7/jquery.timeago.min.js"></script>
+    <script>
+        jQuery(document).ready(function() {
+            const updateNotifications = function() { 
+                fetch("/notifications.json")
+                    .then(res => res.json())
+                    .then((data) => {
+                        $('#notifications-count').text(data.length);
+                        data.map( (item) => {
+                            let text = ""
+                            if(item.joined) {
+                                // friend joined your order
+                                text = `<a href="">${item.invited_user}</a> has joined your <a href="/orders/${item.order_id}">order</a> from 
+                                        <a href="#menu">${item.order_restaurant}</a>`
+
+                            } else {
+                                // friend invited you to order
+                                text = `<a href="">${item.order_owner}</a> Invited you to his <a href="/orders/${item.order_id}">order</a> from 
+                                        <a href="#menu">${item.order_restaurant}</a>
+                                        <a href="/orders/${item.order_id}/join" class="rIcon"><i class="fa fa-sign-in"></i></a>`
+                            }
+                            const notification = `
+                            <li>
+                                <div class="col-md-3 col-sm-3 col-xs-3">
+                                    <div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
+                                </div>
+                                <div class="col-md-9 col-sm-9 col-xs-9 pd-l0">
+                                    ${text}
+                                    <div>
+                                        <p class="time"><time class="timeago" datetime="${item['updated_at']}">${item['updated_at']}</time></p>
+                                    </div>
+                                </div>
+                            </li>`
+                            $('#drop-content').empty();
+                            $('#drop-content').append(notification);
+                            jQuery("time.timeago").timeago();
+                        })
+                    });
+            }
+            updateNotifications();
+            
+            setInterval(updateNotifications, 5 * 1000);
+        });
+    </script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <div class="container">
@@ -60,66 +105,23 @@
                         </ul>
                         <ul style="display: block; position: absolute !important; right: 1.5rem;" class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i> Notification</a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" style="position: relative" aria-hidden="true"></i>
+                                <div class="text-light bg-danger" id="notifications-count" style="position: absolute; top: 0.5rem; left: 0.3rem; border-radius: 50%; width: 2rem; height: 2rem; text-align: center"></div>
+                                 Notification</a>
                                 <ul style="position: absolute !important;" class="dropdown-menu notify-drop">
                                     <div class="notify-drop-title">
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-6 col-xs-6">Bildirimler (<b>2</b>)</div>
-                                            <div class="col-md-6 col-sm-6 col-xs-6 text-right"><a href="" class="rIcon allRead" data-tooltip="tooltip" data-placement="bottom" title="tümü okundu."><i class="fa fa-dot-circle-o"></i></a></div>
+                                            <div class="col-md-6 col-sm-6 col-xs-6">Notifications: </div>
                                         </div>
                                     </div>
 
-                                    <div class="drop-content">
-                                        <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3">
-                                                <div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
-                                            </div>
-                                            <div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Ahmet</a> yorumladı. <a href="">Çicek bahçeleri...</a> <a href="" class="rIcon"><i class="fa fa-dot-circle-o"></i></a>
-
-                                                <hr>
-                                                <p class="time">Şimdi</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3">
-                                                <div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
-                                            </div>
-                                            <div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Ahmet</a> yorumladı. <a href="">Çicek bahçeleri...</a> <a href="" class="rIcon"><i class="fa fa-dot-circle-o"></i></a>
-                                                <p>Lorem ipsum sit dolor amet consilium.</p>
-                                                <p class="time">1 Saat önce</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3">
-                                                <div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
-                                            </div>
-                                            <div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Ahmet</a> yorumladı. <a href="">Çicek bahçeleri...</a> <a href="" class="rIcon"><i class="fa fa-dot-circle-o"></i></a>
-                                                <p>Lorem ipsum sit dolor amet consilium.</p>
-                                                <p class="time">29 Dakika önce</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3">
-                                                <div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
-                                            </div>
-                                            <div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Ahmet</a> yorumladı. <a href="">Çicek bahçeleri...</a> <a href="" class="rIcon"><i class="fa fa-dot-circle-o"></i></a>
-                                                <p>Lorem ipsum sit dolor amet consilium.</p>
-                                                <p class="time">Dün 13:18</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3">
-                                                <div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
-                                            </div>
-                                            <div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Ahmet</a> yorumladı. <a href="">Çicek bahçeleri...</a> <a href="" class="rIcon"><i class="fa fa-dot-circle-o"></i></a>
-                                                <p>Lorem ipsum sit dolor amet consilium.</p>
-                                                <p class="time">2 Hafta önce</p>
-                                            </div>
-                                        </li>
+                                    <div id="drop-content" class="drop-content">
+                          
+                                        
 
                                     </div>
                                     <div class="notify-drop-footer text-center">
-                                        <a href=""><i class="fa fa-eye"></i> Tümünü Göster</a>
+                                        <a href=""><i class="fa fa-eye"></i>View all notifications</a>
                                     </div>
                                 </ul>
                             </li>

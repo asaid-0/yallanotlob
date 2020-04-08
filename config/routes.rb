@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get  'users/index',to:"users#index"
   get 'search/groups', to: "orders#searchGroups"
   get 'search/friends', to: "orders#searchFriends"
+  get 'notifications', to: "orders#notifications"
   devise_for :users, controllers: 
         { sessions: 'users/sessions' ,
           registrations: 'users/registrations',

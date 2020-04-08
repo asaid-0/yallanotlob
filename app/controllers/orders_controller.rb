@@ -67,6 +67,19 @@ class OrdersController < ApplicationController
       format.json { render json: @users }
     end
   end
+
+  def notifications
+    joined_friends = Invite.where(:order_id => current_user.orders.pluck(:id)).where(joined: true).order(updated_at: :desc)
+    invitations = current_user.invites.where(joined: false)
+    @notifications = joined_friends + invitations
+    @notifications.sort_by &:updated_at
+    @notifications.reverse!
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @notifications }
+    end
+  end
   
 
   def show
