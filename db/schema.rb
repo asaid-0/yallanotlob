@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_06_043824) do
+ActiveRecord::Schema.define(version: 2020_04_08_090133) do
 
   create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "text"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2020_04_06_043824) do
     t.index ["order_id"], name: "index_activities_on_order_id"
   end
 
-  create_table "friendships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "friendships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "friend_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2020_04_06_043824) do
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
-  create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", limit: 50, null: false
     t.bigint "user_id"
     t.text "description", null: false
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2020_04_06_043824) do
     t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
-  create_table "groups_users", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "groups_users", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "group_id", null: false
     t.index ["group_id"], name: "index_groups_users_on_group_id"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2020_04_06_043824) do
     t.index ["user_id"], name: "index_invites_on_user_id"
   end
 
-  create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "item"
     t.integer "quantity"
     t.decimal "price", precision: 5, scale: 2
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2020_04_06_043824) do
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
-  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "restaurant"
     t.integer "status", default: 0
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 2020_04_06_043824) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "email", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -88,6 +88,8 @@ ActiveRecord::Schema.define(version: 2020_04_06_043824) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "provider"
+    t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
