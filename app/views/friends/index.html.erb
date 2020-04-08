@@ -1,4 +1,7 @@
 <div class="container" style="text-align: center;">
+    <%# <h1 class="heading">Friends List</h1> %>
+
+    <h1 class="m-2 mb-4 title">Friends</h1>
     <div class="row justify-content-center">
         <div class="col-sm-6">
             <div id='form' class='_form'>
@@ -23,27 +26,33 @@
                 </fieldset>
             </div>
         </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-sm-12" >
-            <h1 style="color: blanchedalmond;">Friends List</h1>
-            <table class="orders-table">
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Action</th>
-                </tr>
-                <% @friends.each do |friend| %>
-                <tr class="data-row">
-                    <td><%= friend.name %></td>
-                    <td><%= friend.email %></td>
-                    <td>
-                        <%= link_to 'Unfriend', friend_path(friend), method: :delete %>
-                    </td>
-                </tr>
-                <% end %>
-            </table>
+
+
+        <div class="col-sm-6" >
+            <div class="borderbox-container">
+                <table class="orders-table">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                    <% @friends.each do |friend| %>
+                    <tr class="data-row">
+                        <td><%= friend.name %></td>
+                        <td><%= friend.email %></td>
+                        <td>
+                            <%= link_to 'Unfriend', friend_path(friend), method: :delete %>
+                        </td>
+                    </tr>
+                    <% end %>
+                </table>
+            </div>
         </div>
+    
+    
     </div>
+    
+    
+        
+    
 </div>

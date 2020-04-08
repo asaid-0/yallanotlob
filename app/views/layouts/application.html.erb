@@ -10,7 +10,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <%# <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> %>
 </head>
 
 <body>
@@ -20,6 +20,21 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <div class="container">
+    <div class="logo-container">
+        <ul class="ripple">
+            <li>y</li>
+            <li>a</li>
+            <li>l</li>
+            <li>l</li>
+            <li>a</li>
+            <li>n</li>
+            <li>o</li>
+            <li>t</li>
+            <li>l</li>
+            <li>o</li>
+            <li>b</li>
+        </ul>  
+    </div>
         <div style="display: block !important;" class="row">
             <nav style="padding: 0; display: block !important;" class="navbar navbar-default">
                 <div style="display: block !important;" class="container-fluid">
@@ -31,20 +46,22 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href=<%= root_path %>>YallaNotlob</a>
+
+
+
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul style="display: block" class="nav navbar-nav">
                             <li class="active"><a href=<%= root_path %>>Home <span class="sr-only">(current)</span></a></li>
-                            <li><a href="<%= friends_path %>">Friends</a></li>
-                            <li><a href="<%= groups_path %>">Groups</a></li>
-                            <li><a href="<%= orders_path %>">Orders</a></li>
+                            <li><a href=<%= friends_path %>>Friends</a></li>
+                            <li><a href=<%= groups_path %>>Groups</a></li>
+                            <li><a href=<%= orders_path %>>Orders</a></li>
                         </ul>
                         <ul style="display: block; position: absolute !important; right: 1.5rem;" class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i>Notification (<b>2</b>)</a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i> Notification</a>
                                 <ul style="position: absolute !important;" class="dropdown-menu notify-drop">
                                     <div class="notify-drop-title">
                                         <div class="row">
@@ -133,7 +150,7 @@
             <a href="https://github.com/asaid-0/yallanotlob.git"> YallaNotlob.com</a>
         </div>
     </div>
-
+    <script src="https://kit.fontawesome.com/1ab5551907.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

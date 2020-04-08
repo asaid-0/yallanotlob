@@ -59,3 +59,5 @@ gem 'mysql2', '~> 0.5.3'
 gem 'devise'
 gem 'carrierwave'
 gem 'dotenv-rails'
+
+gem 'omniauth-facebook'

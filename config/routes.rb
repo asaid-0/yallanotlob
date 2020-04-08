@@ -18,6 +18,10 @@ Rails.application.routes.draw do
 
 
   resources :friends
+
+
+    # get '/auth/:provider/callback', to: 'users/omniauth_callbacks#facebook'
+
   get  'users/index',to:"users#index"
   get 'search/groups', to: "orders#searchGroups"
   get 'search/friends', to: "orders#searchFriends"
@@ -26,7 +30,9 @@ Rails.application.routes.draw do
           registrations: 'users/registrations',
           passwords: 'users/passwords',
           confirmations: 'users/confirmations',
+          unlocks: 'users/unlocks',
           omniauth: 'users/omniauth',
-          unlocks: 'users/unlocks'
+          :omniauth_callbacks => "users/omniauth_callbacks" 
         }
+        
 end
