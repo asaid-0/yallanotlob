@@ -6,6 +6,16 @@ class OrdersController < ApplicationController
     @user_invited_orders_ids = Invite.where("user_id = ?" , current_user.id).pluck(:order_id)
     @user_invited_orders = Order.where("id = ?" , @user_invited_orders_ids)
   end
+  
+  def join
+    invitation = Invite.find(params[:invitation_id].to_i)
+    if (invitation.user_id == current_user.id) && (invitation.order_status == "waiting")
+      invitation.joined = true
+      invitation.save()
+      return redirect_to action: 'show', id: 1
+    end
+    redirect_back(fallback_location: root_path)    
+  end
 
   def update
     @order = Order.find(params[:id])
@@ -31,7 +41,7 @@ class OrdersController < ApplicationController
     if @order.save
       # create invites for friends
       friends_params.each do |id|
-        if @order.invites.where(user_id: id).empty?
+        if @order.invites.where(user_id: id).empty? && current_user.id != id
           @add_invite = @order.invites.new
           @add_invite.user_id = id
           @add_invite.save();
@@ -83,7 +93,7 @@ class OrdersController < ApplicationController
   
 
   def show
-    @order = Order.find(1)
+    @order = Order.find(params[:id].to_i)
   end
 
 

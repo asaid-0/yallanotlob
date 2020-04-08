@@ -13,8 +13,6 @@
 </head>
 
 <body>
-<time class="timeago" datetime="2020-04-04T03:23:36.423Z">2020-04-04T03:23:36.423Z</time>
-
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <%# timeago plugin %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.6.7/jquery.timeago.min.js"></script>
@@ -36,7 +34,7 @@
                                 // friend invited you to order
                                 text = `<a href="">${item.order_owner}</a> Invited you to his <a href="/orders/${item.order_id}">order</a> from 
                                         <a href="#menu">${item.order_restaurant}</a>
-                                        <a href="/orders/${item.order_id}/join" class="rIcon"><i class="fa fa-sign-in"></i></a>`
+                                        <a href="/orders/${item.id}/join" class="rIcon"><i class="fa fa-sign-in"></i></a>`
                             }
                             const notification = `
                             <li>
@@ -63,8 +61,10 @@
     </script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <div class="container">
-    <div class="logo-container">
+
+
+    <div style="display: flex !important; flex-direction: column" class="container">
+     <div class="logo-container">
         <ul class="ripple">
             <li>y</li>
             <li>a</li>
@@ -79,9 +79,12 @@
             <li>b</li>
         </ul>  
     </div>
+
+
+
         <div style="display: block !important;" class="row">
             <nav style="padding: 0; display: block !important;" class="navbar navbar-default">
-                <div style="display: block !important;" class="container-fluid">
+                <div style="display: block !important;" class="container-fluid p-0">
 
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -96,7 +99,7 @@
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <div class="collapse navbar-collapse p-0" id="bs-example-navbar-collapse-1">
                         <ul style="display: block" class="nav navbar-nav">
                             <li class="active"><a href=<%= root_path %>>Home <span class="sr-only">(current)</span></a></li>
                             <li><a href=<%= friends_path %>>Friends</a></li>
@@ -121,7 +124,7 @@
 
                                     </div>
                                     <div class="notify-drop-footer text-center">
-                                        <a href=""><i class="fa fa-eye"></i>View all notifications</a>
+                                        <a href=""><i class="fa fa-eye"></i> View all notifications</a>
                                     </div>
                                 </ul>
                             </li>
@@ -129,7 +132,7 @@
                                 <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     <span class="glyphicon">&#xe008;</span><%= current_user.name %> <span class="caret"></span></a>
                                 <ul style="position: absolute !important;" class="dropdown-menu">
-                                    <li><%= link_to 'logout', destroy_user_session_path, method: :delete%></li>
+                                    <li><%= link_to 'logout', destroy_user_session_path, method: :get %></li>
 
                                 </ul>
                             </li>
