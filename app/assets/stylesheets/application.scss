@@ -16,8 +16,221 @@
 
  /* thai */
 @import "bootstrap";
+@import url(https://fonts.googleapis.com/css?family=Oswald);
+
+// start title
+
+
+.title{
+	background: #fff;
+	box-shadow: 0px 0px 0px 4px #fff;
+	border: dashed 2px #2c2c2c;
+	padding: 0.2em 0.5em 0.2em 1em;
+	color: #3e3e3e !important;
+	/* border-radius: 1px; */
+	  font-size: 24px;
+	}
+
+// end title
+
+
+
+
+// start logo
+
+
+
+
+.container *{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
+  }
+
+  
+  .logo-container {
+	height:80px;
+	line-height:90px;
+  }
+  
+  a{ color:#64B9E6 }
+  a:hover{ color:#006699 }
+  
+  .contain{
+	max-width:800px;
+	margin:50px auto;
+	text-align:center;
+  }
+  
+  /* the good stuff: */
+  ul.ripple{
+	float:left;
+	overflow:hidden;
+	margin:0;
+	padding-left:50px;
+	font-size:38px;
+	font-weight:600;
+  }
+  
+  ul.ripple li{
+	float:left;
+	list-style:none;
+	padding:0 1px;
+	color:white;
+	text-shadow:1px 1px 3px rgba(0,0,0,.25);
+  }
+  
+  ul.ripple li:nth-child(2){
+	-webkit-animation-delay:50ms;
+	-moz-animation-delay:50ms;
+	animation-delay:50ms;
+  }
+  
+  ul.ripple li:nth-child(3){
+	-webkit-animation-delay:100ms;
+	-moz-animation-delay:100ms;
+	animation-delay:100ms;
+  }
+  /* that green bar */
+  ul.ripple li:nth-child(6):before{
+	position:absolute;
+	bottom:20px;
+	left:-5%;
+	display:block;
+	content:'';
+	height:5px;
+	width:110%;
+	background:#bada55;
+	border-radius:2px;
+	box-shadow:1px 1px 3px rgba(0,0,0,.25);
+  }
+  
+  ul.ripple li:nth-child(4){
+	-webkit-animation-delay:150ms;
+	-moz-animation-delay:150ms;
+	animation-delay:150ms;
+  }
+  
+  ul.ripple li:nth-child(5){
+	-webkit-animation-delay:200ms;
+	-moz-animation-delay:200ms;
+	animation-delay:200ms;
+  }
+  
+  ul.ripple li:nth-child(6){
+	-webkit-animation-delay:250ms;
+	-moz-animation-delay:250ms;
+	animation-delay:250ms;
+	color:#64B9E6;
+  }
+  
+  ul.ripple li:nth-child(7){
+	-webkit-animation-delay:300ms;
+	-moz-animation-delay:300ms;
+	animation-delay:300ms;
+	color:#64B9E6;
+  }
+  ul.ripple li:nth-child(8){
+	-webkit-animation-delay:350ms;
+	-moz-animation-delay:350ms;
+	animation-delay:350ms;
+	color:#64B9E6;
+  }
+  ul.ripple li:nth-child(9){
+	-webkit-animation-delay:350ms;
+	-moz-animation-delay:350ms;
+	animation-delay:350ms;
+	color:#64B9E6;
+  }
+  ul.ripple li:nth-child(10){
+	-webkit-animation-delay:400ms;
+	-moz-animation-delay:400ms;
+	animation-delay:400ms;
+	color:#64B9E6;
+  }
+  ul.ripple li:nth-child(11){
+	-webkit-animation-delay:450ms;
+	-moz-animation-delay:450ms;
+	animation-delay:450ms;
+	color:#64B9E6;
+  }
+  
+  
+  ul.ripple:hover li{
+   -webkit-animation-name: ripple;
+   -webkit-animation-duration: 300ms;
+   -webkit-animation-iteration-count: 1;
+   -webkit-animation-timing-function: ease-in;
+   -moz-animation-name: ripple;
+   -moz-animation-duration: 300ms;
+   -moz-animation-iteration-count: 1; 
+   -moz-animation-timing-function: ease-in;
+   -o-animation-name: ripple;
+   -o-animation-duration: 300ms;
+   -o-animation-iteration-count: 1; 
+   -o-animation-timing-function: ease-in;
+   animation-name: ripple;
+   animation-duration: 300ms;
+   animation-iteration-count: 1; 
+   animation-timing-function: ease-in;
+  }
+  
+  @-webkit-keyframes ripple {
+	0%   { -webkit-transform: skewY(0deg); }
+	25%  { -webkit-transform: skewY(10deg) translateY(-5px); }
+	50%  { -webkit-transform: skewY(0deg) translateY(-10px); }
+	75%  { -webkit-transform: skewY(-10deg) translateY(-5px);}
+	100% { -webkit-transform: skewY(0deg) translateY(0px); }
+  }
+  
+  @-moz-keyframes ripple {
+	0%   { -moz-transform: skewY(0deg); }
+	25%  { -moz-transform: skewY(10deg) translateY(-5px); }
+	50%  { -moz-transform: skewY(0deg) translateY(-10px); }
+	75%  { -moz-transform: skewY(-10deg) translateY(-5px);}
+	100% { -moz-transform: skewY(0deg) translateY(0px); }
+  }
+  
+  @-o-keyframes ripple {
+	0%   { -o-transform: skewY(0deg); }
+	25%  { -o-transform: skewY(10deg) translateY(-5px); }
+	50%  { -o-transform: skewY(0deg) translateY(-10px); }
+	75%  { -o-transform: skewY(-10deg) translateY(-5px);}
+	100% { -o-transform: skewY(0deg) translateY(0px); }
+  }
+  
+  @keyframes ripple {
+	0%   { transform: skewY(0deg); }
+	25%  { transform: skewY(10deg) translateY(-5px); }
+	50%  { transform: skewY(0deg) translateY(-10px); }
+	75%  { transform: skewY(-10deg) translateY(-5px);}
+	100% { transform: skewY(0deg) translateY(0px); }
+  }
+
+
+
+// end logo 
+
+
+
 body {
-	background-image: url(/assets/image.jpg);
+	background-image: url(/assets/image.png);
+}
+
+
+
+.heading {
+	text-align: center;
+    font-size: 3em;
+    line-height: 1.3em;
+    margin: 2rem 0 0.5rem 0;
+    padding: 0;
+    text-shadow: 0 0 1rem #fefefe;
 }
 
 .footer {

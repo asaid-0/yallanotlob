@@ -1,5 +1,5 @@
 <div class="container">
-   <a href="<%= new_order_path %>"><button class="btn btn-success m-3 float-right"><i class="fas fa-hamburger order"></i></button></a>
+   <a href="<%= new_order_path %>"><button style="z-index: 2" class="btn btn-success m-3 float-right"><i class="fas fa-hamburger order"></i></button></a>
    <% flash.each do |type, msg| %>
       <div class="alert alert-success alert-dismissible">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -8,65 +8,70 @@
    <% end %>
 
    <% if !@user_orders.empty? %>
-      <h1>My Orders</h1>
-      <table class="orders-table">
-         <tr>
-            <th>Name</th>
-            <th>Restaurant</th>
-            <th>Menu</th>
-            <th>Invited Friends</th>
-            <th>Joined Friends</th>
-            <th>Status</th>
-            <th>Action</th>
-         </tr>
-         <% @user_orders.each do |order| %>
-         <tr class = "data-row">
-            <td><%= order.name %></td>
-               <td><%= order.restaurant %></td>
-               <td><%= order.menu %></td>
-               <td><%= order.invites.where(joined: false).count %></td>
-               <td><%= order.invites.where(joined: true).count %></td>
-               <td><%= order.status %></td>
-               <td>
-                  <% if order.status == "waiting" %>
-                     <%= link_to 'finish', order_path(id:order.id , link:"finish") , method: :patch%>
-                     <%= link_to 'cancel', order_path(id:order.id , link:"cancel") , method: :patch%>
-                  <% end %>
-                  <%= link_to 'view', order , method: :get%>
-               </td>
-         </tr>
-         <% end %>
-      </table> 
+          <h1 class="mb-4 title">Orders</h1>
+      <div class="borderbox-container">
+         <table class="orders-table">
+            <tr>
+               <th>Name</th>
+               <th>Restaurant</th>
+               <th>Menu</th>
+               <th>Invited Friends</th>
+               <th>Joined Friends</th>
+               <th>Status</th>
+               <th>Action</th>
+            </tr>
+            <% @user_orders.each do |order| %>
+            <tr class = "data-row">
+               <td><%= order.name %></td>
+                  <td><%= order.restaurant %></td>
+                  <td><%= order.menu %></td>
+                  <td><%= order.invites.where(joined: false).count %></td>
+                  <td><%= order.invites.where(joined: true).count %></td>
+                  <td><%= order.status %></td>
+                  <td>
+                     <% if order.status == "waiting" %>
+                        <%= link_to 'finish', order_path(id:order.id , link:"finish") , method: :patch%>
+                        <%= link_to 'cancel', order_path(id:order.id , link:"cancel") , method: :patch%>
+                     <% end %>
+                     <%= link_to 'view', order , method: :get%>
+                  </td>
+            </tr>
+            <% end %>
+         </table> 
+      </div>
    <% else %>
       <h1> Want to make Order ?</h1>
    <% end %>
 
    <% if !@user_invited_orders.empty? %> 
       <h1>Invited Orders</h1>
-      <table class="orders-table">
-         <tr>
-            <th>Name</th>
-            <th>Restaurant</th>
-            <th>Menu</th>
-            <th>Invited Friends</th>
-            <th>Joined Friends</th>
-            <th>Status</th>
-            <th>Action</th>
-         </tr>
-         <% @user_invited_orders.each do |order| %>
-         <tr class="data-row">
-            <td><%= order.name %></td>
-            <td><%= order.restaurant %></td>
-            <td><%= order.menu %></td>
-            <td><%= order.invites.where(joined: false).count %></td>
-            <td><%= order.invites.where(joined: true).count %></td>
-            <td><%= order.status %></td>
-            <td>
-               <%= link_to 'view', order , method: :get%>
-            </td>
-         </tr>
-         <% end %>
-      </table>
+      <div class="borderbox-container">
+      
+         <table class="orders-table">
+            <tr>
+               <th>Name</th>
+               <th>Restaurant</th>
+               <th>Menu</th>
+               <th>Invited Friends</th>
+               <th>Joined Friends</th>
+               <th>Status</th>
+               <th>Action</th>
+            </tr>
+            <% @user_invited_orders.each do |order| %>
+            <tr class="data-row">
+               <td><%= order.name %></td>
+               <td><%= order.restaurant %></td>
+               <td><%= order.menu %></td>
+               <td><%= order.invites.where(joined: false).count %></td>
+               <td><%= order.invites.where(joined: true).count %></td>
+               <td><%= order.status %></td>
+               <td>
+                  <%= link_to 'view', order , method: :get%>
+               </td>
+            </tr>
+            <% end %>
+         </table>
+      </div>
    <% else %>
          <h1>You Aren't Invited Yet <i class="far fa-frown fa-lg"></i> </h1>
    <% end %>
