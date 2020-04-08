@@ -45,11 +45,11 @@
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	-webkit-transform: translateZ(0);
-	-moz-transform: translateZ(0);
-	-ms-transform: translateZ(0);
-	-o-transform: translateZ(0);
-	transform: translateZ(0);
+	// -webkit-transform: translateZ(0);
+	// -moz-transform: translateZ(0);
+	// -ms-transform: translateZ(0);
+	// -o-transform: translateZ(0);
+	// transform: translateZ(0);
   }
 
   
@@ -127,6 +127,11 @@
 	-moz-animation-delay:250ms;
 	animation-delay:250ms;
 	color:#64B9E6;
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
   }
   
   ul.ripple li:nth-child(7){
