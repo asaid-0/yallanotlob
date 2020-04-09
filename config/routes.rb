@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
     # get '/auth/:provider/callback', to: 'users/omniauth_callbacks#facebook'
 
-  get  'users/index',to:"users#index"
+  get 'users/index/:id',to:"users#index", as: :user_profile
   get 'search/groups', to: "orders#searchGroups"
   get 'search/friends', to: "orders#searchFriends"
   get 'notifications', to: "orders#notifications"

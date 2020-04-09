@@ -29,7 +29,7 @@
                             let text = ""
                             if(item.joined) {
                                 // friend joined your order
-                                text = `<a href="">${item.invited_user}</a> has joined your <a href="/orders/${item.order_id}">order</a> from 
+                                text = `<a href="/users/index/${item.user_id}">${item.invited_user}</a> has joined your <a href="/orders/${item.order_id}">order</a> from 
                                         <a href="#menu">${item.order_restaurant}</a>`
 
                             } else {

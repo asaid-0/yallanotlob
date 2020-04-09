@@ -1,1 +1,62 @@
-<h1>YallaNotolob </h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+            <div class="well details">
+                <div class="col-sm-12">
+                    <div>
+                    <% if defined? (@user)%>
+                        <h2 style="text-decoration:underline;"><%= @user.name %></h2>
+                        <p><strong>E-mail: </strong><%= @user.email %> </p>
+                        <p><strong>Number of orders: </strong><%= @user.orders.count() %> </p>
+                        <p><strong>Number of invites: </strong><%= @user.invites.count() %> </p>
+                    <% else %>
+                        <h2 style="text-decoration:underline;">User not found</h2>
+                    <% end %>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+body {
+    font-family: "Segoe UI", 'sans-serif';
+}
+
+.avg {
+    font-size:77px; 
+    padding-top: 20px;
+    color:#5CB85C;
+}
+
+.details {
+    min-height: 355px;
+    min-width: 500px;
+    display: inline-block;
+    text-align:center ;
+}
+
+.rating {
+    padding-left:40px;
+}
+
+.skillLine {    
+    display:inline-block;
+    width:100%;
+    padding: 3px 4px;    
+}
+
+.skills {
+    text-decoration:underline;
+}
+
+div.skill {
+    background: #F58723;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+    padding: 3px 4px;    
+    width:70px;
+}
+
