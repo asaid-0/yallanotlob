@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
     if (invitation.user_id == current_user.id) && (invitation.order_status == "waiting")
       invitation.joined = true
       invitation.save()
-      return redirect_to action: 'show', id: 1
+      return redirect_to action: 'show', id: invitation.order_id
     end
     redirect_back(fallback_location: root_path)    
   end

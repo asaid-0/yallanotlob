@@ -4,12 +4,17 @@ class Invite < ApplicationRecord
 
     # Virtual Attributes to be used in /notifications.json
     attribute :order_owner, :string
+    attribute :owner_id, :integer
     attribute :invited_user, :string
     attribute :order_restaurant, :string
     attribute :order_status, :string
 
     def order_owner
         return Order.find(self.order_id).user.name
+    end
+
+    def owner_id
+        return Order.find(self.order_id).user.id
     end
 
     def invited_user
@@ -26,7 +31,7 @@ class Invite < ApplicationRecord
 
 
     def as_json(options = {})
-        super(methods: [:order_owner, :invited_user, :order_restaurant, :order_status])
+        super(methods: [:order_owner, :invited_user, :order_restaurant, :order_status, :owner_id])
     end
 
 
