@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
     @user_orders =  Order.where(user_id: current_user.id)
     # user invited-orders
     @user_invited_orders_ids = Invite.where("user_id = ?" , current_user.id).pluck(:order_id)
-    @user_invited_orders = Order.where("id = ?" , @user_invited_orders_ids)
+    @user_invited_orders = Order.where(:id => @user_invited_orders_ids)
   end
   
   def join
