@@ -4,7 +4,17 @@ class OrdersController < ApplicationController
     @user_orders =  Order.where(user_id: current_user.id)
     # user invited-orders
     @user_invited_orders_ids = Invite.where("user_id = ?" , current_user.id).pluck(:order_id)
-    @user_invited_orders = Order.where("id = ?" , @user_invited_orders_ids)
+    @user_invited_orders = Order.where(:id => @user_invited_orders_ids)
+  end
+  
+  def join
+    invitation = Invite.find(params[:invitation_id].to_i)
+    if (invitation.user_id == current_user.id) && (invitation.order_status == "waiting")
+      invitation.joined = true
+      invitation.save()
+      return redirect_to action: 'show', id: 1
+    end
+    redirect_back(fallback_location: root_path)    
   end
 
   def update
@@ -31,7 +41,7 @@ class OrdersController < ApplicationController
     if @order.save
       # create invites for friends
       friends_params.each do |id|
-        if @order.invites.where(user_id: id).empty?
+        if @order.invites.where(user_id: id).empty? && current_user.id != id
           @add_invite = @order.invites.new
           @add_invite.user_id = id
           @add_invite.save();
@@ -67,10 +77,23 @@ class OrdersController < ApplicationController
       format.json { render json: @users }
     end
   end
+
+  def notifications
+    joined_friends = Invite.where(:order_id => current_user.orders.pluck(:id)).where(joined: true).order(updated_at: :desc)
+    invitations = current_user.invites.where(joined: false)
+    @notifications = joined_friends + invitations
+    @notifications.sort_by &:updated_at
+    @notifications.reverse!
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @notifications }
+    end
+  end
   
 
   def show
-    @order = Order.find(1)
+    @order = Order.find(params[:id].to_i)
   end
 
 
