@@ -7,6 +7,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
 
     <%# <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> %>
@@ -23,6 +24,7 @@
                     .then(res => res.json())
                     .then((data) => {
                         $('#notifications-count').text(data.length);
+                        $('#drop-content').empty();
                         data.map( (item) => {
                             let text = ""
                             if(item.joined) {
@@ -32,9 +34,17 @@
 
                             } else {
                                 // friend invited you to order
-                                text = `<a href="">${item.order_owner}</a> Invited you to his <a href="/orders/${item.order_id}">order</a> from 
+                                if (item.order_status != 'waiting') {
+                                    text = `<s><a href="">${item.order_owner}</a> Invited you to his <a href="/orders/${item.order_id}">order</a> from 
                                         <a href="#menu">${item.order_restaurant}</a>
-                                        <a href="/orders/${item.id}/join" class="rIcon"><i class="fa fa-sign-in"></i></a>`
+                                        order is ${item.order_status}
+                                        <a class="text-danger disabled rIcon"><i class="fa fa-sign-in"></i></a></s>`
+
+                                } else {
+                                    text = `<a href="">${item.order_owner}</a> Invited you to his <a href="/orders/${item.order_id}">order</a> from 
+                                        <a href="#menu">${item.order_restaurant}</a>
+                                        <a href="/orders/${item.id}/join" class="text-success rIcon"><i class="fa fa-sign-in"></i></a>`
+                                }
                             }
                             const notification = `
                             <li>
@@ -48,7 +58,6 @@
                                     </div>
                                 </div>
                             </li>`
-                            $('#drop-content').empty();
                             $('#drop-content').append(notification);
                             jQuery("time.timeago").timeago();
                         })

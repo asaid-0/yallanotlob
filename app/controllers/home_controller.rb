@@ -3,7 +3,9 @@ class HomeController < ApplicationController
         @latest = []
         @activities = []
         current_user.invites.each do |invite|
-            invite.order.activities.each {|a| @activities.push(a)}
+            if Friendship.where(user_id: current_user.id).where(friend_id: invite.order.user.id).exists?
+                invite.order.activities.each {|a| @activities.push(a)}
+            end 
             if invite.order.status == 'waiting'
                 @latest.push(invite.order)
             end
