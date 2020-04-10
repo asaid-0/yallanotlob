@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
         redirect_back(fallback_location: root_path, notice: 'Item was successfully created.')
         
       else
-        flash[:error] = 'please fill all fields'   
+        flash[:error] = @item.errors   
         redirect_back(fallback_location: root_path)
       end
   end

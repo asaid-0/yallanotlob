@@ -1,169 +1,150 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Yallanotlob</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-
     <%# <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> %>
-</head>
-
-<body>
+  </head>
+  <body>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <%# timeago plugin %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.6.7/jquery.timeago.min.js"></script>
     <script>
-        jQuery(document).ready(function() {
-            const updateNotifications = function() { 
-                fetch("/notifications.json")
-                    .then(res => res.json())
-                    .then((data) => {
-                        $('#notifications-count').text(data.length);
-                        $('#drop-content').empty();
-                        data.map( (item) => {
-                            let text = ""
-                            if(item.joined) {
-                                // friend joined your order
-                                text = `<a href="/users/index/${item.user_id}">${item.invited_user}</a> has joined your <a href="/orders/${item.order_id}">order</a> from 
-                                        <a href="#menu">${item.order_restaurant}</a>`
-
-                            } else {
-                                // friend invited you to order
-                                if (item.order_status != 'waiting') {
-                                    text = `<s><a href="">${item.order_owner}</a> Invited you to his <a href="/orders/${item.order_id}">order</a> from 
-                                        <a href="#menu">${item.order_restaurant}</a>
-                                        order is ${item.order_status}
-                                        <a class="text-danger disabled rIcon"><i class="fa fa-sign-in"></i></a></s>`
-
-                                } else {
-                                    text = `<a href="">${item.order_owner}</a> Invited you to his <a href="/orders/${item.order_id}">order</a> from 
-                                        <a href="#menu">${item.order_restaurant}</a>
-                                        <a href="/orders/${item.id}/join" class="text-success rIcon"><i class="fa fa-sign-in"></i></a>`
-                                }
-                            }
-                            const notification = `
-                            <li>
-                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                    <div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
-                                </div>
-                                <div class="col-md-9 col-sm-9 col-xs-9 pd-l0">
-                                    ${text}
-                                    <div>
-                                        <p class="time"><time class="timeago" datetime="${item['updated_at']}">${item['updated_at']}</time></p>
-                                    </div>
-                                </div>
-                            </li>`
-                            $('#drop-content').append(notification);
-                            jQuery("time.timeago").timeago();
-                        })
-                    });
-            }
-            updateNotifications();
-            
-            setInterval(updateNotifications, 5 * 1000);
-        });
+      jQuery(document).ready(function() {
+          const updateNotifications = function() {
+              fetch("/notifications.json")
+                  .then(res => res.json())
+                  .then((data) => {
+                      $('#notifications-count').text(data.length);
+                      $('#drop-content').empty();
+                      data.map( (item) => {
+                          let text = ""
+                          if(item.joined) {
+                              // friend joined your order
+                              text = `<a href="/users/index/${item.user_id}">${item.invited_user}</a> has joined your <a href="/orders/${item.order_id}">order</a> from
+                                      <a href="#menu">${item.order_restaurant}</a>`
+      
+                          } else {
+                              // friend invited you to order
+                              if (item.order_status != 'waiting') {
+                                  text = `<s><a href="">${item.order_owner}</a> Invited you to his <a href="/orders/${item.order_id}">order</a> from
+                                      <a href="#menu">${item.order_restaurant}</a>
+                                      order is ${item.order_status}
+                                      <a class="text-danger disabled rIcon"><i class="fa fa-sign-in"></i></a></s>`
+      
+                              } else {
+                                  text = `<a href="">${item.order_owner}</a> Invited you to his <a href="/orders/${item.order_id}">order</a> from
+                                      <a href="#menu">${item.order_restaurant}</a>
+                                      <a href="/orders/${item.id}/join" class="text-success rIcon"><i class="fa fa-sign-in"></i></a>`
+                              }
+                          }
+                          const notification = `
+                          <li>
+                              <div class="col-md-3 col-sm-3 col-xs-3">
+                                  <div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
+                              </div>
+                              <div class="col-md-9 col-sm-9 col-xs-9 pd-l0">
+                                  ${text}
+                                  <div>
+                                      <p class="time"><time class="timeago" datetime="${item['updated_at']}">${item['updated_at']}</time></p>
+                                  </div>
+                              </div>
+                          </li>`
+                          $('#drop-content').append(notification);
+                          jQuery("time.timeago").timeago();
+                      })
+                  });
+          }
+          updateNotifications();
+      
+          setInterval(updateNotifications, 5 * 1000);
+      });
     </script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-
-
     <div style="display: flex !important; flex-direction: column" class="container">
-     <div class="logo-container">
+      <div class="logo-container">
         <ul class="ripple">
-            <li>y</li>
-            <li>a</li>
-            <li>l</li>
-            <li>l</li>
-            <li>a</li>
-            <li>n</li>
-            <li>o</li>
-            <li>t</li>
-            <li>l</li>
-            <li>o</li>
-            <li>b</li>
-        </ul>  
-    </div>
-
-
-
-        <div style="display: block !important;" class="row">
-            <nav style="padding: 0; display: block !important;" class="navbar navbar-default">
-                <div style="display: block !important;" class="container-fluid p-0">
-
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-
-
-
+          <li>y</li>
+          <li>a</li>
+          <li>l</li>
+          <li>l</li>
+          <li>a</li>
+          <li>n</li>
+          <li>o</li>
+          <li>t</li>
+          <li>l</li>
+          <li>o</li>
+          <li>b</li>
+        </ul>
+      </div>
+      <div style="display: block !important;" class="row">
+        <nav style="padding: 0; display: block !important;" class="navbar navbar-default">
+          <div style="display: block !important;" class="container-fluid p-0">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse p-0" id="bs-example-navbar-collapse-1">
+              <ul style="display: block" class="nav navbar-nav">
+                <li class="active"><a href=<%= root_path %>>Home <span class="sr-only">(current)</span></a></li>
+                <li><a href=<%= friends_path %>>Friends</a></li>
+                <li><a href=<%= groups_path %>>Groups</a></li>
+                <li><a href=<%= orders_path %>>Orders</a></li>
+              </ul>
+              <ul style="display: block; position: absolute !important; right: 1.5rem;" class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" style="position: relative" aria-hidden="true"></i>
+                    <div class="text-light bg-danger" id="notifications-count" style="position: absolute; top: 0.5rem; left: 0.3rem; border-radius: 50%; width: 2rem; height: 2rem; text-align: center"></div>
+                    Notification</a>
+                  <ul style="position: absolute !important;" class="dropdown-menu notify-drop">
+                    <div class="notify-drop-title">
+                      <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">Notifications: </div>
+                      </div>
                     </div>
-
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse p-0" id="bs-example-navbar-collapse-1">
-                        <ul style="display: block" class="nav navbar-nav">
-                            <li class="active"><a href=<%= root_path %>>Home <span class="sr-only">(current)</span></a></li>
-                            <li><a href=<%= friends_path %>>Friends</a></li>
-                            <li><a href=<%= groups_path %>>Groups</a></li>
-                            <li><a href=<%= orders_path %>>Orders</a></li>
-                        </ul>
-                        <ul style="display: block; position: absolute !important; right: 1.5rem;" class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" style="position: relative" aria-hidden="true"></i>
-                                <div class="text-light bg-danger" id="notifications-count" style="position: absolute; top: 0.5rem; left: 0.3rem; border-radius: 50%; width: 2rem; height: 2rem; text-align: center"></div>
-                                 Notification</a>
-                                <ul style="position: absolute !important;" class="dropdown-menu notify-drop">
-                                    <div class="notify-drop-title">
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-6 col-xs-6">Notifications: </div>
-                                        </div>
-                                    </div>
-
-                                    <div id="drop-content" class="drop-content">
-                          
-                                        
-
-                                    </div>
-                                    <div class="notify-drop-footer text-center">
-                                        <a href=""><i class="fa fa-eye"></i> View all notifications</a>
-                                    </div>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <span class="glyphicon">&#xe008;</span><%= current_user.name %> <span class="caret"></span></a>
-                                <ul style="position: absolute !important;" class="dropdown-menu">
-                                    <li><%= link_to 'logout', destroy_user_session_path, method: :get %></li>
-
-                                </ul>
-                            </li>
-                        </ul>
-                    </div><!-- /.navbar-collapse -->
-                </div><!-- /.container-fluid -->
-            </nav>
-        </div>
+                    <div id="drop-content" class="drop-content">
+                    </div>
+                    <div class="notify-drop-footer text-center">
+                      <a href=""><i class="fa fa-eye"></i> View all notifications</a>
+                    </div>
+                  </ul>
+                </li>
+                <li class="dropdown">
+                  <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <span class="glyphicon">&#xe008;</span><%= current_user.name %> <span class="caret"></span></a>
+                  <ul style="position: absolute !important;" class="dropdown-menu">
+                    <li><%= link_to 'logout', destroy_user_session_path, method: :get %></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+          </div>
+          <!-- /.container-fluid -->
+        </nav>
+      </div>
     </div>
     <script>
-        $(function() {
-            $('[data-tooltip="tooltip"]').tooltip()
-        });
+      $(function() {
+          $('[data-tooltip="tooltip"]').tooltip()
+      });
     </script>
     <%= yield %>
-
     <div class="footer">
-        <div class="footer-copyright text-center py-3">© 2020 Copyright:
-            <a href="https://github.com/asaid-0/yallanotlob.git"> YallaNotlob.com</a>
-        </div>
+      <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="https://github.com/asaid-0/yallanotlob.git"> YallaNotlob.com</a>
+      </div>
     </div>
     <script src="https://kit.fontawesome.com/1ab5551907.js" crossorigin="anonymous"></script>
-</body>
-
+  </body>
 </html>
