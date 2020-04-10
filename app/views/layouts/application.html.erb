@@ -31,13 +31,13 @@
                           } else {
                               // friend invited you to order
                               if (item.order_status != 'waiting') {
-                                  text = `<s><a href="">${item.order_owner}</a> Invited you to his <a href="/orders/${item.order_id}">order</a> from
+                                  text = `<s><a href="/users/index/${item.owner_id}">${item.order_owner}</a> Invited you to his <a href="/orders/${item.order_id}">order</a> from
                                       <a href="#menu">${item.order_restaurant}</a>
                                       order is ${item.order_status}
                                       <a class="text-danger disabled rIcon"><i class="fa fa-sign-in"></i></a></s>`
       
                               } else {
-                                  text = `<a href="">${item.order_owner}</a> Invited you to his <a href="/orders/${item.order_id}">order</a> from
+                                  text = `<a href="/users/index/${item.owner_id}">${item.order_owner}</a> Invited you to his <a href="/orders/${item.order_id}">order</a> from
                                       <a href="#menu">${item.order_restaurant}</a>
                                       <a href="/orders/${item.id}/join" class="text-success rIcon"><i class="fa fa-sign-in"></i></a>`
                               }
